@@ -23,34 +23,37 @@ in this 3h workshop we will install the raspbian operating system from scratch, 
 overview
 ==
 
-1. [burn raspbian to your sd card]
+1. [burn raspbian to your sd card][burn raspbian to your sd card]
 
-2. [start your raspberry pi]
+2. [start your raspberry pi][start your raspberry pi]
 
-3. [log in to your raspberry pi]
+3. [log in to your raspberry pi][log in to your raspberry pi]
 
-4. [installing pure data]
+4. [installing pure data][installing pure data]
 
-5. [installing supercollider]
+5. [installing supercollider][installing supercollider]
 
-6. [tune your audio]
+6. [tune your audio][tune your audio]
 
-7. [autostart]
+7. [autostart][autostart]
 
-8. [communicate with arduino]
+8. [communicate with arduino][communicate with arduino]
 
-9. [useful terminal commands]
+9. [useful terminal commands][useful terminal commands]
 
-10. [shutdown button]
+10. [shutdown button][shutdown button]
 
 burn raspbian to your sd card
 --
 
-* sd card - 8gb or larger
-* laptop or computer with sd reader/writer
-* [etcher.io](http://etcher.io) for mac, linux, windows
-* latest raspbian image. here 2016-05-27-raspbian-jessie.img from https://www.raspberrypi.org/downloads/raspbian/
-you can use the .img file or directly better just burn the .zip file
+* sd card
+    **must be 8gb or larger**
+* laptop
+    **or other computer with sd reader/writer**
+* [etcher.io](http://etcher.io)
+    **for mac, linux, windows**
+* latest raspbian image - here [2016-05-27-raspbian-jessie.img](https://www.raspberrypi.org/downloads/raspbian/)
+    **you can use the .img file or directly better just burn the .zip file**
 
 start your raspberry pi
 --
