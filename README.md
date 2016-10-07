@@ -23,17 +23,18 @@ in this 3h workshop we will install the raspbian operating system from scratch, 
 overview
 ==
 
-1. [burn raspbian to your sd card](burn_raspbian_to_your_sd_card)
+1. [burn raspbian to your sd card](#burn_raspbian_to_your_sd_card)
 2. [start your raspberry pi](start_your_raspberry_pi)
 3. [log in to your raspberry pi](log_in_to_your_raspberry_pi)
 4. [setup raspbian](setup_raspbian)
-5. [installing pure data](installing_pure_data)
-6. [installing supercollider](installing_supercollider)
-7. [tune your audio](tune_your_audio)
-8. [autostart](autostart)
-9. [communicate with arduino](communicate_with_arduino)
-10. [useful terminal commands](useful_terminal_commands)
-11. [shutdown button](shutdown_button)
+5. [setup wifi](setup_wifi)
+6. [installing pure data](installing_pure_data)
+7. [installing supercollider](installing_supercollider)
+8. [tune your audio](tune_your_audio)
+9. [autostart](autostart)
+10. [communicate with arduino](communicate_with_arduino)
+11. [useful terminal commands](useful_terminal_commands)
+12. [shutdown button](shutdown_button)
 
 burn raspbian to your sd card
 --
@@ -91,13 +92,36 @@ setup raspbian
     - (_see #3 above_)
 2. type `sudo raspi-config`
 3. change user password
-    - advanced options / hostname
-    - advanced options / memory split
-    - advanced options / vnc
+4. change hostname under advanced options
+    - (_so that you can identify your raspberry pi on the network_)
+    - (_then use `ssh pi@newname` to log in_)
+5. optional: change memory split under advanced options
+    - (_if you only will run headless and never use gui set it to the lowest (16)_)
+6. optional: enable vnc under advanced options
+    - (_so that you can use the gui remotely with vnc viewer_)
+    - (_install real's [vnc viewer](https://www.realvnc.com/download/viewer/)_)
+7. finish and reboot
 
-real [vnc viewer](https://www.realvnc.com/download/viewer/)
+![raspiconfig](raspiconfig.png)
 
-reference: setting up wifi via command line... https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+setup wifi
+--
+
+1. log again in via ssh
+    - (_note new hostname and new password_)
+2. type `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf`
+3. type or copy/paste the following at the bottom
+```
+network={
+    ssid="wifiname"
+    psk="password"
+}
+```
+4. press ctrl+o to save and ctrl+x to exit
+5. type `sudo reboot` to restart
+    - (_the raspberry pi should now reboot and try to connect to the wifi network_)
+
+reference: [setting up wifi via command line](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)
 
 installing pure data
 --
