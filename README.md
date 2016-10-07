@@ -4,7 +4,7 @@ held at [ems](http://elektronmusikstudion.se) 9oct2016, organized by [vems](http
 
 in this 3h workshop we will install the raspbian operating system from scratch, install pure data and supercollider and last look at how to connect an arduino board and send data to/from it from the raspberry pi.
 
-***participants should bring:***
+**participants should bring:**
 
 * laptop - preferably with sd card reader/writer
 * micro sd card - 8gb or larger
@@ -14,7 +14,7 @@ in this 3h workshop we will install the raspbian operating system from scratch, 
 * ethernet cable
 * arduino with usb cable
 
-***additional:*** (but not necessary)
+**additional:** (_but not necessary_)
 
 * usb sound card
 * usb wlan module
@@ -23,44 +23,40 @@ in this 3h workshop we will install the raspbian operating system from scratch, 
 overview
 ==
 
-1. [burn raspbian to your sd card][burn raspbian to your sd card]
+1. [burn raspbian to your sd card](burn raspbian to your sd card)
 
-2. [start your raspberry pi][start your raspberry pi]
+2. [start your raspberry pi](start your raspberry pi)
 
-3. [log in to your raspberry pi][log in to your raspberry pi]
+3. [log in to your raspberry pi](log in to your raspberry pi)
 
-4. [installing pure data][installing pure data]
+4. [installing pure data](installing pure data)
 
-5. [installing supercollider][installing supercollider]
+5. [installing supercollider](installing supercollider)
 
-6. [tune your audio][tune your audio]
+6. [tune your audio](tune your audio)
 
-7. [autostart][autostart]
+7. [autostart](autostart)
 
-8. [communicate with arduino][communicate with arduino]
+8. [communicate with arduino](communicate with arduino)
 
-9. [useful terminal commands][useful terminal commands]
+9. [useful terminal commands](useful terminal commands)
 
-10. [shutdown button][shutdown button]
+10. [shutdown button](shutdown button)
 
 burn raspbian to your sd card
 --
 
-* sd card
-    **must be 8gb or larger**
-* laptop
-    **or other computer with sd reader/writer**
-* [etcher.io](http://etcher.io)
-    **for mac, linux, windows**
-* latest raspbian image - here [2016-05-27-raspbian-jessie.img](https://www.raspberrypi.org/downloads/raspbian/)
-    **you can use the .img file or directly better just burn the .zip file**
+* sd card (_must be 8gb or larger_)
+* laptop (_or other computer with sd reader/writer_)
+* [etcher.io](http://etcher.io) (_mac, linux, windows_)
+* latest raspbian image - here [2016-05-27-raspbian-jessie.img](https://www.raspberrypi.org/downloads/raspbian/) (_you can use the .img file or better just burn the .zip file without unpacking_)
 
 start your raspberry pi
 --
 
-* 5v micro usb for power
-* ethernet cable connect to your home router or directly to laptop - activate internet sharing - change wlan on the rpi
-* raspberry pi insert the sd card before connecting 5v power
+* 5v micro usb (_for power_)
+* ethernet cable (_connect to your home router or directly to laptop - activate internet sharing - change wlan on the rpi_)
+* raspberry pi (_insert the sd card before connecting 5v power_)
 * on first boot the rpi will automatically expand the file system
 
 log in to your raspberry pi
@@ -80,37 +76,40 @@ sudo raspi-config
 #advanced options / vnc
 'exit' to leave
 
-[vnc viewer](https://www.realvnc.com/download/viewer/)
+real [vnc viewer](https://www.realvnc.com/download/viewer/)
 
 reference: setting up wifi via command line... https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
 
 installing pure data
 --
 
-http://www.fredrikolofsson.com/f0blog/?q=node/630
+see <http://www.fredrikolofsson.com/f0blog/?q=node/630>
 
 installing supercollider
 --
 
-https://github.com/redFrik/supercolliderStandaloneRPI2
+see <https://github.com/redFrik/supercolliderStandaloneRPI2>
 
 tune your audio
 --
 
+```bash
 set alsavolume:
 alsamixer
 amixer
+```
 
 autostart
 --
 
-autostart pure data
+```bash
 crontab -e
+```
 
 arduino
 --
 
-´´´cpp
+```cpp
 //arduino code
 void setup() {
     Serial.begin(57600);
@@ -124,11 +123,14 @@ void loop() {
     Serial.write(255);
     delay(100);  //update rate
 }
-´´´
+```
 
+```bash
 apt-cache search "^pd-"
 sudo apt-get install pd-comport pd-cyclone
+```
 
+pure data patch. save as ```pdarduino.pd```
 ```
 #N canvas 141 95 450 300 10;
 #X msg 86 31 devices;
@@ -154,28 +156,32 @@ while True:
     print ser.readline()
 ```
 
+```
 a= SerialPort("/dev/ttyUSB0", 57600);
 r= Routine.run({999.do{var h= a.read; var l= a.read; (h<<8+l).postln}})
+```
 
 useful terminal commands
 --
 
-ls  #list files
-df -h  #disk free
-free -h  #ram memory
-top  #cpu usage (quit with 'q')
-lsusb  #list usb devices
-aplay -l  #list available soundcards
-exit  #leave ssh
+```bash
+ls          #list files
+df -h       #disk free
+free -h     #ram memory
+top         #cpu usage (quit with 'q')
+lsusb       #list usb devices
+aplay -l    #list available soundcards
+exit        #leave ssh
 sudo halt -p
 sudo reboot
 sudo pkill pd
-ls /dev/tty*  #see if /dev/ttyUSB0 is there
+ls /dev/tty*    #see if /dev/ttyUSB0 is there
+```
 
 shutdown button
 --
 
-´´´python
+```python
 import sys
 from os import system
 from time import sleep
@@ -188,4 +194,4 @@ while True:
         system('sudo halt -p')
         sleep(10)
     sleep(0.5)
-´´´
+```
