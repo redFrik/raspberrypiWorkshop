@@ -23,25 +23,17 @@ in this 3h workshop we will install the raspbian operating system from scratch, 
 overview
 ==
 
-1. [burn_raspbian_to_your_sd_card](burn raspbian to your sd card)
-
-2. [start_your_raspberry_pi](start your raspberry pi)
-
-3. [log_in_to_your_raspberry_pi](log in to your raspberry pi)
-
-4. [installing_pure_data](installing pure data)
-
-5. [installing_supercollider](installing supercollider)
-
-6. [tune_your_audio](tune your audio)
-
-7. [autostart](autostart)
-
-8. [communicate_with_arduino](communicate with arduino)
-
-9. [useful_terminal_commands](useful terminal commands)
-
-10. [shutdown_button](shutdown button)
+1. [burn raspbian to your sd card](burn_raspbian_to_your_sd_card)
+2. [start your raspberry pi](start_your_raspberry_pi)
+3. [log in to your raspberry pi](log_in_to_your_raspberry_pi)
+4. [setup raspbian](setup_raspbian)
+5. [installing pure data](installing_pure_data)
+6. [installing supercollider](installing_supercollider)
+7. [tune your audio](tune_your_audio)
+8. [autostart](autostart)
+9. [communicate with arduino](communicate_with_arduino)
+10. [useful terminal commands](useful_terminal_commands)
+11. [shutdown button](shutdown_button)
 
 burn raspbian to your sd card
 --
@@ -55,10 +47,10 @@ burn raspbian to your sd card
     - (_mac, linux, windows_)
     - (_you can also use [pifiller](http://ivanx.com/raspberrypi/)_)
 3. start etcher
-4. select the zip file
-5. insert your 8gb sd card6
+4. select the raspbian zip file
+5. insert your 8gb sd card
 6. click flash
-    - (_on my machine the process takes ~7min_)
+    - (_on my machine the process takes ~9min_)
 
 ![etcher](etcher.png)
 
@@ -71,27 +63,37 @@ start your raspberry pi
     - (_if to your mac laptop: go to system preferences / network and activate internet sharing - share from wifi to ethernet_)
     - (_if to your windows machine: see [here](http://raspberrypi.stackexchange.com/questions/11684/how-can-i-connect-my-pi-directly-to-my-pc-and-share-the-internet-connection)_)
 3. connect 5v micro usb
+    - (_always connect power last_)
     - (_on first boot the rpi will automatically expand the file system_)
 
 log in to your raspberry pi
 --
 
-1. after applying 5v wait a bit
-    - (_specially on first boot it will take longer to connect to the network_)
+1. wait a bit after applying 5v
+    - (_specially on first boot it will take a while to connect to the network_)
 2. find your raspberry pi on the network
-    - (_we want to see that it is accessible_)
-    - log in to your router (_admin setup panel_)
-    - on osx you can use [lanscan](https://www.iwaxx.com/lanscan/)
-3. `ssh pi@raspberry`
+    - (_we want to see that it is accessible and which ip address it got assigned_)
+    - (_log in to your router's admin setup panel_)
+    - (_on osx you can use [lanscan](https://www.iwaxx.com/lanscan)_)
+3. open terminal and type `ssh pi@raspberry`
+    - (_terminal is also called console. on osx it is found under applications/utilities_)
     - (_if you get a warning about remote host identification first do `ssh-keygen -R raspberrypi`_)
-    - (_or try `ssh pi@raspberrypi.local` or `pi@192.168.1.52` or whatever ip address you saw in your router/lanscan search above (#2)_)
+    - (_or try `ssh pi@raspberrypi.local` or `pi@192.168.1.52` or whatever ip address you saw in your router/lanscan search in #2 above_)
 4. default password 'raspberry'
-5. `sudo raspi-config`
-    - change user password
+5. type 'exit' to leave
+
+![login](login.png)
+
+setup raspbian
+--
+
+1. log in again using ssh
+    - (_see #3 above_)
+2. type `sudo raspi-config`
+3. change user password
     - advanced options / hostname
     - advanced options / memory split
     - advanced options / vnc
-'exit' to leave
 
 real [vnc viewer](https://www.realvnc.com/download/viewer/)
 
