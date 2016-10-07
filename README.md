@@ -57,35 +57,40 @@ burn raspbian to your sd card
 3. start etcher
 4. select the zip file
 5. insert your 8gb sd card6
-6. select the card
-7. flash
-    - (_on my machine the process will take ~9min_)
+6. click flash
+    - (_on my machine the process takes ~7min_)
 
 ![etcher](etcher.png)
 
 start your raspberry pi
 --
 
-* 5v micro usb (_for power_)
-* ethernet cable (_connect to your home router or directly to laptop - activate internet sharing - change wlan on the rpi_)
-* raspberry pi (_insert the sd card before connecting 5v power_)
-* on first boot the rpi will automatically expand the file system
+1. put the sd card in your raspberry pi
+2. connect the ethernet cable
+    - (_the other end goes to your home wlan router or to your laptop_)
+    - (_if to your mac laptop: go to system preferences / network and activate internet sharing - share from wifi to ethernet_)
+    - (_if to your windows machine: see [here](http://raspberrypi.stackexchange.com/questions/11684/how-can-i-connect-my-pi-directly-to-my-pc-and-share-the-internet-connection)_)
+3. connect 5v micro usb
+    - (_on first boot the rpi will automatically expand the file system_)
 
 log in to your raspberry pi
 --
 
-* wait a bit
-* find it on the network
-log in to router
-use lanscan
-ssh pi@raspberry
-ssh-keygen -R raspberrypi
-default password 'raspberry'
-sudo raspi-config
-#change user password
-#advanced options / hostname
-#advanced options / memory split
-#advanced options / vnc
+1. after applying 5v wait a bit
+    - (_specially on first boot it will take longer to connect to the network_)
+2. find your raspberry pi on the network
+    - (_we want to see that it is accessible_)
+    - log in to your router (_admin setup panel_)
+    - on osx you can use [lanscan](https://www.iwaxx.com/lanscan/)
+3. `ssh pi@raspberry`
+    - (_if you get a warning about remote host identification first do `ssh-keygen -R raspberrypi`_)
+    - (_or try `ssh pi@raspberrypi.local` or `pi@192.168.1.52` or whatever ip address you saw in your router/lanscan search above (#2)_)
+4. default password 'raspberry'
+5. `sudo raspi-config`
+    - change user password
+    - advanced options / hostname
+    - advanced options / memory split
+    - advanced options / vnc
 'exit' to leave
 
 real [vnc viewer](https://www.realvnc.com/download/viewer/)
