@@ -23,18 +23,18 @@ in this 3h workshop we will install the raspbian operating system from scratch, 
 overview
 ==
 
-1. [burn raspbian to your sd card](#burn-raspbian-to-your-sd-card)
-2. [start your raspberry pi](#start-your-raspberry-pi)
-3. [log in to your raspberry pi](#log-in-to-your-raspberry-pi)
-4. [setup raspbian](#setup-raspbian)
-5. [setup wifi](#setup-wifi)
-6. [install pure data](#install-pure_data)
-7. [install supercollider](#install-supercollider)
-8. [tune your audio](#tune-your-audio)
+1. [burn raspbian to your sd card](#burn raspbian to your sd card)
+2. [start your raspberry pi](#start your raspberry pi)
+3. [log in to your raspberry pi](#log in to your raspberry pi)
+4. [setup raspbian](#setup raspbian)
+5. [setup wifi](#setup wifi)
+6. [install pure data](#install pure data)
+7. [install supercollider](#install supercollider)
+8. [tune your audio](#tune your audio)
 9. [autostart](#autostart)
-10. [communicate with arduino](#communicate-with-arduino)
-11. [useful terminal commands](#useful-terminal-commands)
-12. [shutdown button](#shutdown-button)
+10. [communicate with arduino](#communicate with arduino)
+11. [useful terminal commands](#useful terminal commands)
+12. [shutdown button](#shutdown button)
 
 burn raspbian to your sd card
 --
@@ -74,8 +74,8 @@ log in to your raspberry pi
     - (_specially on first boot it will take a while to connect to the network_)
 2. find your raspberry pi on the network
     - (_we want to see that it is accessible and which ip address it got assigned_)
-    - (_log in to your router's admin setup panel_)
-    - (_on osx you can use [lanscan](https://www.iwaxx.com/lanscan)_)
+    - (_to find out you can log in to your router's admin setup panel_)
+    - (_or on osx you can use [lanscan](https://www.iwaxx.com/lanscan)_)
 3. open terminal and type `ssh pi@raspberry`
     - (_terminal is also called console. on osx it is found under applications/utilities_)
     - (_if you get a warning about remote host identification first do `ssh-keygen -R raspberrypi`_)
@@ -111,23 +111,22 @@ setup wifi
     - (_note new hostname and new password_)
 2. type `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf`
 3. type or copy/paste the following at the bottom
-```
-network={
-    ssid="wifiname"
-    psk="password"
-}
-```
+    ```
+    network={
+        ssid="wifiname"
+        psk="password"
+    }
+    ```
 4. press ctrl+o to save and ctrl+x to exit
 5. type `sudo reboot` to restart
     - (_the raspberry pi should now reboot and try to connect to the wifi network_)
 6. if the raspberry pi could connect to wifi, you can now disconnect the ethernet cable
+7. optional: start real's vnc viewer and try to connect to your raspberry pi
+    - (_download it from [here](https://www.realvnc.com/download/viewer/)_)
 
 ![wifi](wifi.png)
 
 reference: [setting up wifi via command line](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)
-
-7. optional: start real's vnc viewer and try to connect to your raspberry pi
-    - (_download it from [here](https://www.realvnc.com/download/viewer/)_)
 
 ![vnc](vnc.png)
 
@@ -217,16 +216,16 @@ useful terminal commands
 --
 
 ```bash
-ls          #list files
-df -h       #disk free
-free -h     #ram memory
-top         #cpu usage (quit with 'q')
-lsusb       #list usb devices
-aplay -l    #list available soundcards
-exit        #leave ssh
-sudo halt -p
-sudo reboot
-sudo pkill pd
+ls              #list files
+df -h           #disk free
+free -h         #ram memory
+top             #cpu usage (quit with 'q')
+lsusb           #list usb devices
+aplay -l        #list available soundcards
+exit            #leave ssh
+sudo halt -p    #turn off - wait for 10 blinks
+sudo reboot     #restart
+sudo pkill pd   #force quit on some program
 ls /dev/tty*    #see if /dev/ttyUSB0 is there
 ```
 
