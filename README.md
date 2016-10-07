@@ -23,18 +23,18 @@ in this 3h workshop we will install the raspbian operating system from scratch, 
 overview
 ==
 
-1. [burn raspbian to your sd card](#burn_raspbian_to_your_sd_card)
-2. [start your raspberry pi](start_your_raspberry_pi)
-3. [log in to your raspberry pi](log_in_to_your_raspberry_pi)
-4. [setup raspbian](setup_raspbian)
-5. [setup wifi](setup_wifi)
-6. [installing pure data](installing_pure_data)
-7. [installing supercollider](installing_supercollider)
-8. [tune your audio](tune_your_audio)
-9. [autostart](autostart)
-10. [communicate with arduino](communicate_with_arduino)
-11. [useful terminal commands](useful_terminal_commands)
-12. [shutdown button](shutdown_button)
+1. [burn raspbian to your sd card](#burn-raspbian-to-your-sd-card)
+2. [start your raspberry pi](#start-your-raspberry-pi)
+3. [log in to your raspberry pi](#log-in-to-your-raspberry-pi)
+4. [setup raspbian](#setup-raspbian)
+5. [setup wifi](#setup-wifi)
+6. [install pure data](#install-pure_data)
+7. [install supercollider](#install-supercollider)
+8. [tune your audio](#tune-your-audio)
+9. [autostart](#autostart)
+10. [communicate with arduino](#communicate-with-arduino)
+11. [useful terminal commands](#useful-terminal-commands)
+12. [shutdown button](#shutdown-button)
 
 burn raspbian to your sd card
 --
@@ -120,15 +120,25 @@ network={
 4. press ctrl+o to save and ctrl+x to exit
 5. type `sudo reboot` to restart
     - (_the raspberry pi should now reboot and try to connect to the wifi network_)
+6. if the raspberry pi could connect to wifi, you can now disconnect the ethernet cable
+
+![wifi](wifi.png)
 
 reference: [setting up wifi via command line](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)
 
-installing pure data
+7. optional: start real's vnc viewer and try to connect to your raspberry pi
+    - (_download it from [here](https://www.realvnc.com/download/viewer/)_)
+
+![vnc](vnc.png)
+
+![desktop](desktop.png)
+
+install pure data
 --
 
 see <http://www.fredrikolofsson.com/f0blog/?q=node/630>
 
-installing supercollider
+install supercollider
 --
 
 see <https://github.com/redFrik/supercolliderStandaloneRPI2>
@@ -137,7 +147,6 @@ tune your audio
 --
 
 ```bash
-set alsavolume:
 alsamixer
 amixer
 ```
