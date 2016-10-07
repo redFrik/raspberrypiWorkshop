@@ -23,33 +23,45 @@ in this 3h workshop we will install the raspbian operating system from scratch, 
 overview
 ==
 
-1. [burn raspbian to your sd card](burn raspbian to your sd card)
+1. [burn_raspbian_to_your_sd_card](burn raspbian to your sd card)
 
-2. [start your raspberry pi](start your raspberry pi)
+2. [start_your_raspberry_pi](start your raspberry pi)
 
-3. [log in to your raspberry pi](log in to your raspberry pi)
+3. [log_in_to_your_raspberry_pi](log in to your raspberry pi)
 
-4. [installing pure data](installing pure data)
+4. [installing_pure_data](installing pure data)
 
-5. [installing supercollider](installing supercollider)
+5. [installing_supercollider](installing supercollider)
 
-6. [tune your audio](tune your audio)
+6. [tune_your_audio](tune your audio)
 
 7. [autostart](autostart)
 
-8. [communicate with arduino](communicate with arduino)
+8. [communicate_with_arduino](communicate with arduino)
 
-9. [useful terminal commands](useful terminal commands)
+9. [useful_terminal_commands](useful terminal commands)
 
-10. [shutdown button](shutdown button)
+10. [shutdown_button](shutdown button)
 
 burn raspbian to your sd card
 --
 
-* sd card (_must be 8gb or larger_)
-* laptop (_or other computer with sd reader/writer_)
-* [etcher.io](http://etcher.io) (_mac, linux, windows_)
-* latest raspbian image - here [2016-05-27-raspbian-jessie.img](https://www.raspberrypi.org/downloads/raspbian/) (_you can use the .img file or better just burn the .zip file without unpacking_)
+1. download the latest [raspbian image](https://www.raspberrypi.org/downloads/raspbian/)
+    - (_or copy the zip from the provided usbstick_)
+    - (_here we use 2016-05-27-raspbian-jessie.img - not the 'lite' version_)
+    - (_jessie 'lite' will fit on a smaller sd card and is useful for non-gui headless systems_)
+    - (_to save space you can use the .zip file directly without unpacking the .img_)
+2. download [etcher.io](http://etcher.io)
+    - (_mac, linux, windows_)
+    - (_you can also use [pifiller](http://ivanx.com/raspberrypi/)_)
+3. start etcher
+4. select the zip file
+5. insert your 8gb sd card6
+6. select the card
+7. flash
+    - (_on my machine the process will take ~9min_)
+
+![etcher](etcher.png)
 
 start your raspberry pi
 --
