@@ -168,32 +168,37 @@ first make sure your raspberry is connected to the internet and then do the foll
     #X connect 7 0 0 0;
     #X connect 8 0 0 1;
     ```
-6. `pd -stderr -nogui -verbose -audiodev 4 testsines.pd` (test different audiodev - 4 is usually the usb soundcard)
+6. press ctrl+o to save and ctrl+x to exit
+7. `pd -stderr -nogui -verbose -audiodev 4 testsines.pd` (test different audiodev - 4 is usually the usb soundcard)
 
-7. stop with ctrl+c
-8. `nano testmic.pd` and copy/paste the following
-#N canvas 1068 88 450 300 10;
-#X obj 238 230 dac~;
-#X msg 126 154 \; pd dsp 1;
-#X obj 126 83 loadbang;
-#X obj 126 123 del 100;
-#X text 42 122 important ->;
-#X obj 238 24 adc~;
-#X obj 238 53 delwrite~ del1 500;
-#X obj 238 123 delread~ del1 500;
-#X obj 259 80 delwrite~ del2 750;
-#X obj 280 144 delread~ del2 750;
-#X obj 238 182 *~ 0.2;
-#X obj 280 182 *~ 0.2;
-#X connect 2 0 3 0;
-#X connect 3 0 1 0;
-#X connect 5 0 6 0;
-#X connect 5 1 8 0;
-#X connect 7 0 10 0;
-#X connect 9 0 11 0;
-#X connect 10 0 0 0;
-#X connect 11 0 0 1;
+8. stop with ctrl+c
+9. `nano testmic.pd` and copy/paste the following
 
+    ```
+    #N canvas 1068 88 450 300 10;
+    #X obj 238 230 dac~;
+    #X msg 126 154 \; pd dsp 1;
+    #X obj 126 83 loadbang;
+    #X obj 126 123 del 100;
+    #X text 42 122 important ->;
+    #X obj 238 24 adc~;
+    #X obj 238 53 delwrite~ del1 500;
+    #X obj 238 123 delread~ del1 500;
+    #X obj 259 80 delwrite~ del2 750;
+    #X obj 280 144 delread~ del2 750;
+    #X obj 238 182 *~ 0.2;
+    #X obj 280 182 *~ 0.2;
+    #X connect 2 0 3 0;
+    #X connect 3 0 1 0;
+    #X connect 5 0 6 0;
+    #X connect 5 1 8 0;
+    #X connect 7 0 10 0;
+    #X connect 9 0 11 0;
+    #X connect 10 0 0 0;
+    #X connect 11 0 0 1;
+    ```
+10. press ctrl+o to save and ctrl+x to exit
+11. `pd -stderr -nogui -verbose -audiodev 4 testsines.pd` (test different audiodev - 4 is usually the usb soundcard)
 
 reference: <http://www.fredrikolofsson.com/f0blog/?q=node/630>
 
