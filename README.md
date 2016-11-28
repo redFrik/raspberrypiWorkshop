@@ -45,7 +45,7 @@ burn raspbian to your sd card
 
 1. download the latest [raspbian image](https://www.raspberrypi.org/downloads/raspbian/)
     - _or copy the zip from the provided usbstick_
-    -  _to save space you can use the .zip file directly without unpacking the .img_
+    - _to save space you can use the .zip file directly without unpacking the .img_
     - _here we use 2016-09-23-raspbian-jessie - **not** the 'lite' version_
     - _jessie 'lite' will fit on a smaller sd card and is useful for non-gui audio-only headless systems_
 2. download [etcher.io](http://etcher.io)
@@ -79,10 +79,11 @@ log in to your raspberry pi
 2. find your raspberry pi on the network and take note of the ip address (e.g. 192.168.1.52)
     - _we want to see that it is accessible and which ip address it got assigned_
     - _to find out you can log in to your router's admin setup panel_
+    - _or open terminal and type `arp -a` to list connected devices_
     - _or on osx you can use [lanscan](https://www.iwaxx.com/lanscan)_
-3. open a terminal window and type `ssh pi@192.168.1.52` (or )
+3. open a terminal window and type `ssh pi@192.168.1.52` (or whatever ip you found for your rpi)
     - _on osx terminal is found in your applications/utilities folder_
-    - _on windows you can install [putty](?) and then see [here]()_
+    - _on windows you can install [putty](https://www.raspberrypi.org/documentation/remote-access/ssh/windows.md)_
     - _if you get a warning about 'remote host identification' first do `ssh-keygen -R 192.168.1.52`_
     - _instead of the ip you can also use `ssh pi@raspberrypi` or `pi@raspberrypi.local`_
 4. the default password 'raspberry'
@@ -118,12 +119,13 @@ setup wifi
     - _note: use the new hostname and new password_
 2. type `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf`
 3. type or copy/paste the following at the bottom
-      ```
-      network={
-          ssid="wifiname"
-          psk="password"
-      }
-      ```
+
+    ```
+    network={
+        ssid="wifiname"
+        psk="password"
+    }
+    ```
 4. press ctrl+o to save and ctrl+x to exit
 5. restart with `sudo reboot`
     - _the raspberry pi should now reboot and try to connect to the wifi network - check with lanscan or in your router's setup panel like before_
@@ -150,6 +152,7 @@ first make sure your raspberry is connected to the internet and then do the foll
 3. `apt-cache search "^pd-"` (this will just list libraries and externals)
 4. `sudo apt-get install pd-comport pd-cyclone` (this will install two libraries that we need for arduino below)
 5. `nano testsines.pd` and copy/paste in the following
+
     ```
     #N canvas 1068 88 450 300 10;
     #X obj 238 159 dac~;
@@ -309,6 +312,7 @@ another option is to add your own button to run a halt script when pressed. belo
 
 1. log in and type `nano shutdown.py`
 2. type or copy/paste the following
+
     ```python
     import sys
     from os import system
@@ -324,6 +328,5 @@ another option is to add your own button to run a halt script when pressed. belo
             sleep(0.5)
     ```
 3. press ctrl+o to save and ctrl+x to exit
-4. type `crontab -e` and add the following to the bottom
-    `@reboot /usr/bin/python /home/pi/shutdown.py`
+4. type `crontab -e` and add the following to the bottom `@reboot /usr/bin/python /home/pi/shutdown.py`
 5. `sudo reboot`, wait for a bit and then connect a cable/button between gpio pin 3 and ground
