@@ -173,9 +173,9 @@ first make sure your raspberry is connected to the internet and then do the foll
     ```
 6. press ctrl+o to save and ctrl+x to exit
 7. `pd -stderr -nogui -verbose -audiodev 4 testsines.pd` (test different audiodev - 4 is usually the usb soundcard)
-
-8. stop with ctrl+c
-9. `nano testmic.pd` and copy/paste the following
+8. you should hear two sine tones
+9. stop with ctrl+c
+10. `nano testmic.pd` and copy/paste the following
 
     ```
     #N canvas 1068 88 450 300 10;
@@ -200,32 +200,62 @@ first make sure your raspberry is connected to the internet and then do the foll
     #X connect 10 0 0 0;
     #X connect 11 0 0 1;
     ```
-10. press ctrl+o to save and ctrl+x to exit
-11. `pd -stderr -nogui -verbose -audiodev 4 testsines.pd` (test different audiodev - 4 is usually the usb soundcard)
+11. press ctrl+o to save and ctrl+x to exit
+12. `pd -stderr -nogui -verbose -audiodev 4 testmic.pd` (test different audiodev - 4 is usually the usb soundcard)
+13. if you have a soundcard with a mic connected you should hear an echo effect
+14. stop with ctrl+c
 
 reference: <http://www.fredrikolofsson.com/f0blog/?q=node/630>
+
+and if you connect a monitor+keyboard or log in via vnc, you can also also patch pd like normal. just start pure data from the menu on the left hand side (under sound & video). set up your audio under media in the menu bar.
+
+![puredata](puredata.png)
 
 install supercollider
 --
 
-reference: <https://github.com/redFrik/supercolliderStandaloneRPI2>
+just follow the instructions under installation and headless here... <https://github.com/redFrik/supercolliderStandaloneRPI2>
+
+(or if you are using an older rpi1 here <https://github.com/redFrik/supercolliderStandaloneRPI2> )
+
+if you connect a monitor+keyboard or log in via vnc, you can also use the supercollider ide like normal. follow the instructions under startup on the github page linked above.
+
+![supercollider](supercollider.png)
 
 tune your audio
 --
 
-by default the alsa volume is quite low. it's recommended to turn it up so that you can lower the amplifier on the output and thereby get a less noisy signal.
+by default the alsa volume on raspberry pi is quite low. it's recommended to turn it up so that you can lower the amplifier on the output and thereby get a less noisy signal.
 
 ```bash
 alsamixer
-amixer
+```
+
+and to make the settings permanent do...
+
+```bash
+amixer controls #and check which numid is ’Master Playback Volume’
+amixer cset numid=1 100% #adapt this value
+sudo alsactl store
 ```
 
 autostart
 --
 
-```bash
-crontab -e
-```
+to make puredata start the testsines.pd patch at startup do
+
+1. open terminal and type ```crontab -e```
+2. scroll down and add the following line (edit to match your audio device and path)
+
+    ```
+    @reboot /usr/bin/pd -stderr -nogui -audiodev 4 /home/pi/testsines.pd
+    ```
+3. press ctrl+o to save and ctrl+x to exit
+4. `sudo reboot`
+
+and now you should hear the sines after the rpi booted. to stop log in and type `pkill pd`
+
+to autostart supercollider see the github page linked above.
 
 arduino
 --
@@ -298,6 +328,8 @@ sudo reboot     #restart
 sudo pkill pd   #force quit on some program
 ls /dev/tty*    #see if /dev/ttyUSB0 is there
 ```
+
+reference: <https://leanpub.com/jelinux/read>
 
 shutdown
 --
