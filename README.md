@@ -260,8 +260,10 @@ to autostart supercollider see the github page linked above.
 arduino
 --
 
+program an arduino from your laptop with the following
+
 ```cpp
-//arduino code
+//arduino code testarduino.ino
 void setup() {
     Serial.begin(57600);
 }
@@ -276,12 +278,15 @@ void loop() {
 }
 ```
 
+and then on the rpi open terminal and type
+
 ```bash
-apt-cache search "^pd-"
+apt-cache search "^pd-" #just list libraries and externals
 sudo apt-get install pd-comport pd-cyclone
 ```
 
-pure data patch. save as ```pdarduino.pd```
+then `nano testarduino.pd` and copy/paste the following
+
 ```
 #N canvas 141 95 450 300 10;
 #X msg 86 31 devices;
@@ -300,36 +305,62 @@ pure data patch. save as ```pdarduino.pd```
 #X connect 5 0 6 0;
 ```
 
+connect the arduino to the rpi via usb and run the pd patch with
+
+```
+pd -stderr -nogui -verbose -audiodev 4 testarduino.pd
+```
+
+you should see (and hear) values in the range 0-1023 depending on the voltage present on pin A0. stop with ctrl+c.
+
+for supercollider use this code (testarduino.scd)...
+
+```
+(
+s.waitForBoot{
+   var syn, ser, r;
+   syn= {|freq= 0| SinOsc.ar([400, 404]+freq, 0, 0.2)}.play;
+   ser= SerialPort("/dev/ttyUSB0", 57600);
+   r= Routine.run({
+      var val;
+      inf.do{
+         var data= [];
+         var d= 0;
+         while({d!=255 and:{d.size<100}}, {
+            d= ser.read();
+            data= data++d;
+         });
+         if(data[0]==253 and:{data[1]==254}, {
+            val= (data[2]<<8)+data[3];
+            syn.set(\freq, val);
+            val.postln;
+         });
+      };
+   });
+   CmdPeriod.doOnce({ser.close});
+};
+)
+```
+
+and also let's try python. open terminal and type `nano testarduino.py` and paste in the following code
+
 ```python
 import serial
 ser= serial.Serial('/dev/ttyUSB0', 57600)
 while True:
-    print ser.readline()
+    indata= []
+    d= ''
+    while (d!='\xff') and (len(indata)<100):
+        d= ser.read()
+        indata.append(d)
+    if (indata[0]=='\xfd') and (indata[1]=='\xfe'):
+        hibyte= ord(indata[2])
+        lobyte= ord(indata[3])
+        val= (hibyte<<8)+lobyte
+        print val
 ```
 
-```
-a= SerialPort("/dev/ttyUSB0", 57600);
-r= Routine.run({999.do{var h= a.read; var l= a.read; (h<<8+l).postln}})
-```
-
-useful terminal commands
---
-
-```bash
-ls              #list files
-df -h           #disk free
-free -h         #ram memory
-top             #cpu usage (quit with 'q')
-lsusb           #list usb devices
-aplay -l        #list available soundcards
-exit            #leave ssh
-sudo halt -p    #turn off - wait for 10 blinks
-sudo reboot     #restart
-sudo pkill pd   #force quit on some program
-ls /dev/tty*    #see if /dev/ttyUSB0 is there
-```
-
-reference: <https://leanpub.com/jelinux/read>
+start it with `python testarduino.py` and stop with ctrl+c
 
 shutdown
 --
@@ -361,4 +392,23 @@ another option is to add your own button to run a halt script when pressed. belo
     ```
 3. press ctrl+o to save and ctrl+x to exit
 4. type `crontab -e` and add the following to the bottom `@reboot /usr/bin/python /home/pi/shutdown.py`
-5. `sudo reboot`, wait for a bit and then connect a cable/button between gpio pin 3 and ground
+5. `sudo reboot`, wait for a bit and then connect a cable/button between pin 3 (aka bcm2) and ground. see <https://pinout.xyz>
+
+useful terminal commands
+--
+
+```bash
+ls              #list files
+df -h           #disk free
+free -h         #ram memory
+top             #cpu usage (quit with 'q')
+lsusb           #list usb devices
+aplay -l        #list available soundcards
+exit            #leave ssh
+sudo halt -p    #turn off - wait for 10 blinks
+sudo reboot     #restart
+sudo pkill pd   #force quit on some program
+ls /dev/tty*    #see if /dev/ttyUSB0 is there
+```
+
+reference: <https://leanpub.com/jelinux/read>
