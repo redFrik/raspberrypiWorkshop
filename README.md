@@ -55,6 +55,8 @@ burn raspbian to your sd card
 4. insert your 8gb sd card
 5. click flash
     - _on my machine the process takes ~9min_
+6. if you are using a raspbian image newer than 2016-11-25 make an empty file called 'ssh' on the sd card
+    - _for security reasons ssh is no longer enabled by default_
 
 ![etcher](etcher.png)
 
@@ -116,7 +118,7 @@ setup wifi
 --
 
 1. log again in via ssh
-    - _note: use the new hostname and new password_
+    - _note: use the new hostname (see #4 above) and new password_
 2. type `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf`
 3. type or copy/paste the following at the bottom
 
@@ -174,6 +176,7 @@ first make sure your raspberry is connected to the internet and then do the foll
 6. press ctrl+o to save and ctrl+x to exit
 7. `pd -stderr -nogui -verbose -audiodev 4 testsines.pd` (test different audiodev - 4 is usually the usb soundcard)
 8. you should hear two sine tones
+    - _note: if you are using the build-in headphones output (audiodev 0) you should turn up the volume to 100 with `alsamixer` (see [tune your audio](#tune-your-audio) below)_
 9. stop with ctrl+c
 10. `nano testmic.pd` and copy/paste the following
 
@@ -203,11 +206,12 @@ first make sure your raspberry is connected to the internet and then do the foll
 11. press ctrl+o to save and ctrl+x to exit
 12. `pd -stderr -nogui -verbose -audiodev 4 testmic.pd` (test different audiodev - 4 is usually the usb soundcard)
 13. if you have a soundcard with a mic connected you should hear an echo effect
+    - _note: this example will not make any sound if you try it with the built-in audio - there is no sound input on the raspberry pi_
 14. stop with ctrl+c
 
 reference: <http://www.fredrikolofsson.com/f0blog/?q=node/630>
 
-and if you connect a monitor+keyboard or log in via vnc, you can also also patch pd like normal. just start pure data from the menu on the left hand side (under sound & video). set up your audio under media in the menu bar.
+and if you connect a monitor+keyboard or log in via vnc, you can also also patch pd like normal. just start pure data from the menu on the left hand side (under sound & video). set up your audio under 'Media' in the menu bar.
 
 ![puredata](puredata.png)
 
@@ -282,7 +286,7 @@ and then on the rpi open terminal and type
 
 ```bash
 apt-cache search "^pd-" #just list libraries and externals
-sudo apt-get install pd-comport pd-cyclone
+sudo apt-get install pd-comport pd-cyclone #just if you did not do it above
 ```
 
 then `nano testarduino.pd` and copy/paste the following
