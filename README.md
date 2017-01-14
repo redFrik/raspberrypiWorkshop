@@ -319,7 +319,7 @@ you should see (and hear) values in the range 0-1023 depending on the voltage pr
 
 for supercollider use this code (testarduino.scd)...
 
-```
+```supercollider
 (
 s.waitForBoot{
    var syn, ser, r;
