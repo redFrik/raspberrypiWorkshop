@@ -398,6 +398,23 @@ another option is to add your own button to run a halt script when pressed. belo
 4. type `crontab -e` and add the following to the bottom `@reboot /usr/bin/python /home/pi/shutdown.py`
 5. `sudo reboot`, wait for a bit and then connect a cable/button between pin 3 (aka bcm2) and ground. see <https://pinout.xyz>
 
+copy files to & from rpi
+--
+
+one way is to use `scp` (secure copy) in your laptop terminal.
+
+to copy a file from your laptop desktop to rpi desktop directory type:
+
+`scp ~/Desktop/myfile.pd pi@192.168.1.52:Desktop`
+
+to copy another file from your rpi home directory to your laptop home directory type:
+
+`scp pi@192.168.1.52:testsines.pd ~`
+
+to copy a whole folder add the recursive flag `-r`. for example to move a folder from your laptop documents folder to your rpi home directory type:
+
+`scp -r ~/Documents/soundfiles pi@192.168.1.52:`
+
 useful terminal commands
 --
 
@@ -413,6 +430,7 @@ sudo halt -p    #turn off - wait for 10 blinks
 sudo reboot     #restart
 sudo pkill pd   #force quit on some program
 ls /dev/tty*    #see if /dev/ttyUSB0 is there
+rm -r sounds    #remove a folder recursively
 ```
 
 reference: <https://leanpub.com/jelinux/read>
