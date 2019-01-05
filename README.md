@@ -220,7 +220,7 @@ install supercollider
 
 just follow the instructions under installation and headless here... <https://github.com/redFrik/supercolliderStandaloneRPI2>
 
-(or if you are using an older rpi1 here <https://github.com/redFrik/supercolliderStandaloneRPI2> )
+(or if you are using an older rpi1 or a rpi0 here <https://github.com/redFrik/supercolliderStandaloneRPI1> )
 
 if you connect a monitor+keyboard or log in via vnc, you can also use the supercollider ide like normal. follow the instructions under startup on the github page linked above.
 
