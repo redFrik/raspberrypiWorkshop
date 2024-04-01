@@ -2,7 +2,7 @@
 
 held at [ems](http://elektronmusikstudion.se) 9oct2016, organized by [vems](https://vems.nu)
 
-in this 3h workshop we will install the raspbian operating system from scratch, install [pure data](http://puredata.info) and [supercollider](http://supercollider.github.io) and last look at how to connect an [arduino](http://arduino.cc) board and send data to/from it and the raspberry pi.
+in this 3h workshop we will install the raspbian operating system from scratch, install [pure data](https://puredata.info) and [supercollider](https://supercollider.github.io) and last look at how to connect an [arduino](https://arduino.cc) board and send data to/from it and the raspberry pi.
 
 **participants should bring:**
 
@@ -48,7 +48,7 @@ burn raspbian to your sd card
     - _to save space you can use the .zip file directly without unpacking the .img_
     - _here we use 2016-09-23-raspbian-jessie - **not** the 'lite' version_
     - _jessie 'lite' will fit on a smaller sd card and is useful for non-gui audio-only headless systems_
-2. download [etcher.io](http://etcher.io)
+2. download [etcher.io](https://www.balena.io/etcher/)
     - _works on osx, linux, windows_
     - _on osx you can also use [pifiller](http://ivanx.com/raspberrypi/)_
 3. start etcher and select the raspbian zip file
@@ -67,7 +67,7 @@ start your raspberry pi
 2. connect the ethernet cable to your raspberry pi
     - _the other end goes to your home wlan router or to your laptop_
     - _if you connect to a osx: go to system preferences / network and activate internet sharing - share from wifi to ethernet_
-    - _if you connect to a windows machine: see [here](http://raspberrypi.stackexchange.com/questions/11684/how-can-i-connect-my-pi-directly-to-my-pc-and-share-the-internet-connection)_
+    - _if you connect to a windows machine: see [here](https://raspberrypi.stackexchange.com/questions/11684/how-can-i-connect-my-pi-directly-to-my-pc-and-share-the-internet-connection)_
 3. connect 5v micro usb power supply
     - _always connect power last_
     - _and never pull the power without properly shutting down the system (see below)_
@@ -209,7 +209,7 @@ first make sure your raspberry is connected to the internet and then do the foll
     - _note: this example will not make any sound if you try it with the built-in audio - there is no sound input on the raspberry pi_
 14. stop with ctrl+c
 
-reference: <http://www.fredrikolofsson.com/f0blog/?q=node/630>
+reference: <https://fredrikolofsson.com/f0blog/pd-on-raspberry-pi/>
 
 and if you connect a monitor+keyboard or log in via vnc, you can also also patch pd like normal. just start pure data from the menu on the left hand side (under sound & video). set up your audio under 'Media' in the menu bar.
 
